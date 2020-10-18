@@ -15,6 +15,7 @@ export default class Server {
   public io: socketIO.Server;
   private httpServer: http.Server;
 
+
   private constructor() {
     this.app = express();
     this.port = SERVER_PORT;
@@ -31,6 +32,7 @@ export default class Server {
 
 
   private escucharSockets() {
+    
     console.log('Escuchando conexiones - sockets');
 
     this.io.on('connection', cliente => {
@@ -49,5 +51,3 @@ export default class Server {
     this.httpServer.listen(this.port, callback);
   }
 }
-
-
