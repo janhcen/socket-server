@@ -27,7 +27,7 @@ export default class Server {
 
 
   public static get instance() {
-    return this._instance || (new this());
+    return this._instance || ( this._instance = new this() );
   }
 
 
@@ -36,13 +36,19 @@ export default class Server {
     console.log('Escuchando conexiones - sockets');
 
     this.io.on('connection', cliente => {
-      console.log('Cliente conectado');
+
+      // Conectar Cliente
+      socket.conectarCliente( cliente );
+
+      // Configurar usuario
+      socket.configurarUsuario( cliente, this.io );
 
       // Desconectar
       socket.desconectar( cliente );
 
       // Mensajes
       socket.mensaje( cliente, this.io );
+
     })
   }
 
